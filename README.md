@@ -2,6 +2,9 @@
 #### Friday, 09/04
 * 13:00 Set up nodejs and npm on linux laptop
 * 15:00 create-react-app this project
+* 15:05 git configuration on new machine
+* 15:40 project file management/cleanup
+
 
 # Getting Started with Create React App
 
