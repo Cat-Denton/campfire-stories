@@ -5,6 +5,9 @@
 * 15:05 git configuration on new machine
 * 15:40 project file management/cleanup
 
+#### Friday 09/17
+* 15:30 review react and redux concepts
+* 16:30-19:30 watch youtube videos on databases with react and redux
 
 # Getting Started with Create React App
 
