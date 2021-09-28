@@ -9,6 +9,10 @@
 * 15:30 review react and redux concepts
 * 16:30-19:30 watch youtube videos on databases with react and redux
 
+### Sunday 09/26
+
+*14:00-16:30 make campfire gif
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
