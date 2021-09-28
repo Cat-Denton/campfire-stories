@@ -1,5 +1,6 @@
 import react from "react";
 import React from "react";
+import Entry from "./Entry";
 
 function Story() {
   const title = "Scary Story";
@@ -19,10 +20,12 @@ function Story() {
         )}
       </ul>
       <hr />
-      {Object.values(text).map((entry,index) => 
+      <Entry text={text["entry 1"]} />
+      <Entry text={text["entry 2"]} />
+      {/* {Object.values(text).map((entry,index) => 
          
          <p key={index}>{entry}</p>
-      )}
+      )} */}
     </react.Fragment>
   )
 }
