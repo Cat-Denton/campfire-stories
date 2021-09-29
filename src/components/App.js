@@ -1,12 +1,13 @@
 import React from 'react';
 import Header from './Header'
-import Story from './Story';
+import './../App.css'
+import StoryControl from './StoryControl';
 
 function App(){
   return(
     <React.Fragment>
       <Header />
-      <Story />
+      <StoryControl />
     </React.Fragment>
   )
 }

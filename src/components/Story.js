@@ -1,33 +1,36 @@
 import react from "react";
 import React from "react";
 import Entry from "./Entry";
+import PropTypes from 'prop-types';
 
-function Story() {
-  const title = "Scary Story";
-  const author = "Cat";
-  const tags = ["scary", "dark", "mature"]
-  const text = {"entry 1":"stuf stuff stuff stuff stuff stuff", "entry 2": "eat eat eat eat eat eat eat eat eat"}
+function Story(props) {
+  
   return (
     <react.Fragment>
-      <h1>{title}</h1>
-      <h3>by {author}</h3>
+      <h1>{props.title}</h1>
+      <h3>by {props.author}</h3>
       <br />
-      <ul>
-        <em>Tags:</em> {tags.map((tag, index) => 
-          <li key={index}>
-            {tag}            
-          </li>
+      <em>Tags:</em> {props.tags.map((tag, index) => 
+          <span key={index}>
+            {tag} {' '}         
+          </span>
         )}
-      </ul>
+      
       <hr />
-      <Entry text={text["entry 1"]} />
-      <Entry text={text["entry 2"]} />
-      {/* {Object.values(text).map((entry,index) => 
-         
-         <p key={index}>{entry}</p>
-      )} */}
+      {props.entryList.map((entry, index) => 
+        
+        <p key={index}>
+          <Entry text={entry.text} />
+        </p>)}
     </react.Fragment>
   )
+}
+
+Story.propTypes = {
+  title: PropTypes.string,
+  author: PropTypes.string,
+  tags: PropTypes.array,
+  entryList: PropTypes.array
 }
 
 export default Story
