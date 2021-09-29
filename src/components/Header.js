@@ -1,4 +1,4 @@
-import campfireLogo from './../campfireLogo.gif'
+import campfireLogo from './../assets/img/campfireLogo.gif'
 import React from 'react';
 
 function Header() {
