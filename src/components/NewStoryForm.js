@@ -6,7 +6,7 @@ function NewStoryForm(props){
 
   function handleNewStoryFormSubmission(event) {
     event.preventDefault();
-    props.onNewStoryCreation({title: event.target.title.value, author: event.target.author.value, tags: [event.target.tags.value], entryList: [], id: v4()});
+    props.onNewStoryCreation({title: event.target.title.value, author: event.target.author.value, tags: [event.target.tags.value], entryList: [event.target.entryList.value], id: v4()});
   }
   return (
     <React.Fragment>
@@ -23,6 +23,10 @@ function NewStoryForm(props){
           type='text'
           name='tags'
           placeholder='Initial tag' />
+        <br />
+        <textarea
+          name='entryList'
+          placeholder='Initial entry' />
         <button type='submit'>Stay a while, and listen</button>
       </form>
       

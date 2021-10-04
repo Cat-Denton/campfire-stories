@@ -18,10 +18,10 @@ function Story(props) {
       
       <hr />
       {props.entryList.map((entry, index) => 
-        
-        <p key={index}>
-          <Entry text={entry.text} />
-        </p>)}
+        <span key={index}>
+          <Entry text={props.entry} />
+          {console.log(entry)}
+        </span>)}
     </react.Fragment>
   )
 }
