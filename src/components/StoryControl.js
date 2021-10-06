@@ -1,5 +1,6 @@
 import React from "react";
 import NewStoryForm from "./NewStoryForm";
+import StoryDetail from "./StoryDetail";
 import StoryList from './StoryList';
 
 class StoryControl extends React.Component {
@@ -7,7 +8,8 @@ class StoryControl extends React.Component {
     super(props);
     this.state = {
       formVisibleOnPage: false,
-      masterStoryList: []
+      masterStoryList: [],
+      selectedStory: null
     };
   }
   handleAddingNewStoryToList = (newStory) => {
@@ -16,9 +18,15 @@ class StoryControl extends React.Component {
     formVisibleOnPage: false });
   }
 
+  handleChangingSelectedStory = (id) => {
+    const selectedStory = this.state.masterStoryList.filter(story => story.id === id)[0];
+    this.setState({selectedStory: selectedStory});
+  }
+
   handleClick = () => {
     this.setState(prevState => ({
-      formVisibleOnPage: !prevState.formVisibleOnPage
+      formVisibleOnPage: !prevState.formVisibleOnPage,
+      selectedStory: null
     }));
   }
 
@@ -29,10 +37,13 @@ class StoryControl extends React.Component {
       currentlyVisibleState = <NewStoryForm 
       onNewStoryCreation = {this.handleAddingNewStoryToList}
       />
-      buttonText = "Nevermind, maybe read another story"
+      buttonText = "Nevermind, maybe read another story."
+    } else if (this.state.selectedStory !== null) {
+      currentlyVisibleState = <StoryDetail story = {this.state.selectedStory} />
+      buttonText = "Find a different tale."
     } else {
-      currentlyVisibleState = <StoryList storyList={this.state.masterStoryList} />
-      buttonText = "Start a new story"
+      currentlyVisibleState = <StoryList storyList={this.state.masterStoryList} onStorySelection = {this.handleChangingSelectedStory} />
+      buttonText = "Start a new story."
     }
 
     return (

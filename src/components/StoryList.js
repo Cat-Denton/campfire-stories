@@ -16,12 +16,15 @@ function StoryList(props) {
       {props.storyList.map((story,index) =>
         <div key={index}>
           <Story
+            whenStoryClicked={props.onStorySelection}
             title={story.title}
             author={story.author}
             tags={story.tags}
             entryList={story.entryList}
-            key={index}
+            id={story.id}
+            key={story.id}
           />
+          <hr />
         </div>
         )}
       
@@ -30,6 +33,7 @@ function StoryList(props) {
 }
 
 StoryList.propTypes ={
-  storyList: PropTypes.array
+  storyList: PropTypes.array,
+  onStorySelection: PropTypes.func
 }
 export default StoryList;

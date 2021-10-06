@@ -4,24 +4,24 @@ import Entry from "./Entry";
 import PropTypes from 'prop-types';
 
 function Story(props) {
-  
+
   return (
     <react.Fragment>
-      <h1>{props.title}</h1>
-      <h3>by {props.author}</h3>
-      <br />
-      <em>Tags:</em> {props.tags.map((tag, index) => 
+      <div onClick={() => props.whenStoryClicked(props.id)}>
+        <h1>{props.title}</h1>
+        <h3>by {props.author}</h3>
+        <em>Tags:</em> {props.tags.map((tag, index) =>
           <span key={index}>
-            {tag} {' '}         
+            {tag} {' '}
           </span>
         )}
-      
-      <hr />
-      {props.entryList.map((entry, index) => 
-        <span key={index}>
-          <Entry text={props.entry} />
-          {console.log(entry)}
-        </span>)}
+        {props.entryList.map((entry, index) =>
+          <span key={index}>
+            <Entry text={props.entry} />
+            {console.log(entry)}
+          </span>
+        )}
+      </div>
     </react.Fragment>
   )
 }
@@ -30,7 +30,9 @@ Story.propTypes = {
   title: PropTypes.string,
   author: PropTypes.string,
   tags: PropTypes.array,
-  entryList: PropTypes.array
+  entryList: PropTypes.array,
+  id: PropTypes.string,
+  whenStoryClicked: PropTypes.func
 }
 
 export default Story

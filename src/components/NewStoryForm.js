@@ -24,9 +24,13 @@ function NewStoryForm(props){
           name='tags'
           placeholder='Initial tag' />
         <br />
+        <br />
         <textarea
+          rows="18"
+          cols="76"
           name='entryList'
-          placeholder='Initial entry' />
+          placeholder='Start telling your tale' />
+        <br />
         <button type='submit'>Stay a while, and listen</button>
       </form>
       
