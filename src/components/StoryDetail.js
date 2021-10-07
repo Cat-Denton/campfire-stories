@@ -3,7 +3,7 @@ import Entry from './Entry';
 import PropTypes from 'prop-types'
 
 function StoryDetail(props){
-  const { story } = props;
+  const { story, onClickingDelete } = props;
 
   return (
     <React.Fragment>
@@ -14,18 +14,21 @@ function StoryDetail(props){
             {tag} {' '}
           </span>
         )}
+        <hr />
         {story.entryList.map((entry, index) =>
           <span key={index}>
             <Entry text={entry} />
-            {console.log(entry)}
           </span>
         )}
+        <hr />
+        <button onClick={()=> onClickingDelete(story.id) }>Erase this tale from time.</button>
     </React.Fragment>
   )
 }
 
 StoryDetail.propTypes = {
-  story: PropTypes.object
+  story: PropTypes.object,
+  onClickingDelete: PropTypes.func
 }
 
 export default StoryDetail;

@@ -12,11 +12,17 @@ class StoryControl extends React.Component {
       selectedStory: null
     };
   }
+
   handleAddingNewStoryToList = (newStory) => {
     const newMasterStoryList = this.state.masterStoryList.concat(newStory);
     this.setState({masterStoryList: newMasterStoryList,
-    formVisibleOnPage: false });
+    formVisibleOnPage: false, selectedStory: newStory });
   }
+  
+  // handleAddingNewEntryToStoryInList = (id, entry) => {
+  //   const newMasterStoryList = this.state.masterStoryList.story[id].entryList.concat(entry)
+  //   this.setState({masterStoryList: newMasterStoryList})
+  // }
 
   handleChangingSelectedStory = (id) => {
     const selectedStory = this.state.masterStoryList.filter(story => story.id === id)[0];
@@ -24,10 +30,25 @@ class StoryControl extends React.Component {
   }
 
   handleClick = () => {
-    this.setState(prevState => ({
-      formVisibleOnPage: !prevState.formVisibleOnPage,
+    if (this.state.selectedStory != null) {
+      this.setState({
+        selectedStory: null,
+        formVisibleOnPage: false
+      })
+    } else {
+      this.setState(prevState => ({
+        formVisibleOnPage: !prevState.formVisibleOnPage,
+        selectedStory: null
+      }));
+    }
+  }
+
+  handleDeletingStory = (id) => {
+    const newMasterStoryList = this.state.masterStoryList.filter(ticket => ticket.id !== id);
+    this.setState({
+      masterStoryList: newMasterStoryList,
       selectedStory: null
-    }));
+    });
   }
 
   render(){
@@ -39,7 +60,7 @@ class StoryControl extends React.Component {
       />
       buttonText = "Nevermind, maybe read another story."
     } else if (this.state.selectedStory !== null) {
-      currentlyVisibleState = <StoryDetail story = {this.state.selectedStory} />
+      currentlyVisibleState = <StoryDetail story = {this.state.selectedStory} onClickingDelete = {this.handleDeletingStory} />
       buttonText = "Find a different tale."
     } else {
       currentlyVisibleState = <StoryList storyList={this.state.masterStoryList} onStorySelection = {this.handleChangingSelectedStory} />
