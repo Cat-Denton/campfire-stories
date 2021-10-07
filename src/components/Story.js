@@ -1,6 +1,5 @@
 import react from "react";
 import React from "react";
-import Entry from "./Entry";
 import PropTypes from 'prop-types';
 
 function Story(props) {
@@ -13,12 +12,6 @@ function Story(props) {
         <em>Tags:</em> {props.tags.map((tag, index) =>
           <span key={index}>
             {tag} {' '}
-          </span>
-        )}
-        {props.entryList.map((entry, index) =>
-          <span key={index}>
-            <Entry text={props.entry} />
-            {console.log(entry)}
           </span>
         )}
       </div>

@@ -16,7 +16,7 @@ function StoryDetail(props){
         )}
         {story.entryList.map((entry, index) =>
           <span key={index}>
-            <Entry text={story.entry} />
+            <Entry text={entry} />
             {console.log(entry)}
           </span>
         )}
