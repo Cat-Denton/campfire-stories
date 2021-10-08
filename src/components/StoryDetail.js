@@ -1,6 +1,7 @@
 import React from 'react';
 import Entry from './Entry';
 import PropTypes from 'prop-types'
+import NewEntryForm from './NewEntryForm';
 
 function StoryDetail(props){
   const { story, onClickingDelete } = props;
@@ -21,7 +22,9 @@ function StoryDetail(props){
           </span>
         )}
         <hr />
+        <NewEntryForm />
         <button onClick={()=> onClickingDelete(story.id) }>Erase this tale from time.</button>
+
     </React.Fragment>
   )
 }
