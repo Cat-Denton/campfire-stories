@@ -2,6 +2,7 @@ import React from "react";
 import NewStoryForm from "./NewStoryForm";
 import StoryDetail from "./StoryDetail";
 import StoryList from './StoryList';
+import EditStoryForm from './EditStoryForm';
 
 class StoryControl extends React.Component {
   constructor(props) {
@@ -9,7 +10,8 @@ class StoryControl extends React.Component {
     this.state = {
       formVisibleOnPage: false,
       masterStoryList: [],
-      selectedStory: null
+      selectedStory: null,
+      editingStory: false
     };
   }
 
@@ -30,37 +32,62 @@ class StoryControl extends React.Component {
   }
 
   handleClick = () => {
-    if (this.state.selectedStory != null) {
+    if (this.state.editingStory) {
+      this.setState({
+        formVisibleOnPage: false,
+        editingStory: false
+      })
+    } else if (this.state.selectedStory != null) {
       this.setState({
         selectedStory: null,
-        formVisibleOnPage: false
+        formVisibleOnPage: false,
+        editingStory: false
       })
     } else {
       this.setState(prevState => ({
         formVisibleOnPage: !prevState.formVisibleOnPage,
-        selectedStory: null
+        selectedStory: null,
+        editingStory: false
       }));
     }
   }
 
   handleDeletingStory = (id) => {
-    const newMasterStoryList = this.state.masterStoryList.filter(ticket => ticket.id !== id);
+    const newMasterStoryList = this.state.masterStoryList.filter(story => story.id !== id);
     this.setState({
       masterStoryList: newMasterStoryList,
       selectedStory: null
+    })
+  }
+
+  handleEditStoryClick = () => {
+    this.setState({editingStory: true});
+  }
+
+  handleEditingStoryInList = (storyToEdit) => {
+    const editedMasterStoryList = this.state.masterStoryList.filter(story => story.id !== this.state.selectedStory.id).concat(storyToEdit);
+    
+    this.setState({
+      masterStoryList: editedMasterStoryList,
+      editingStory: false,
+      selectedStory: storyToEdit
     });
+    console.log(this.state)
   }
 
   render(){
     let currentlyVisibleState = null;
     let buttonText = null;
-    if (this.state.formVisibleOnPage) {
+    if (this.state.editingStory) {
+      currentlyVisibleState = <EditStoryForm story = {this.state.selectedStory} onEditStory = {this.handleEditingStoryInList} />
+      buttonText = "Nevermind, I don't need to change anything";
+    } else if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <NewStoryForm 
       onNewStoryCreation = {this.handleAddingNewStoryToList}
       />
       buttonText = "Nevermind, maybe read another story."
     } else if (this.state.selectedStory !== null) {
-      currentlyVisibleState = <StoryDetail story = {this.state.selectedStory} onClickingDelete = {this.handleDeletingStory} />
+      currentlyVisibleState = <StoryDetail story = {this.state.selectedStory} onClickingDelete = {this.handleDeletingStory} onClickingEditStory = {this.handleEditStoryClick} />
       buttonText = "Find a different tale."
     } else {
       currentlyVisibleState = <StoryList storyList={this.state.masterStoryList} onStorySelection = {this.handleChangingSelectedStory} />

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import NewEntryForm from './NewEntryForm';
 
 function StoryDetail(props){
-  const { story, onClickingDelete } = props;
+  const { story, onClickingDelete, onClickingEditStory } = props;
 
   return (
     <React.Fragment>
@@ -23,6 +23,7 @@ function StoryDetail(props){
         )}
         <hr />
         <NewEntryForm />
+        <button onClick={()=> onClickingEditStory()}>Change this story's details.</button>
         <button onClick={()=> onClickingDelete(story.id) }>Erase this tale from time.</button>
 
     </React.Fragment>
@@ -31,7 +32,8 @@ function StoryDetail(props){
 
 StoryDetail.propTypes = {
   story: PropTypes.object,
-  onClickingDelete: PropTypes.func
+  onClickingDelete: PropTypes.func,
+  onClickinEditStory: PropTypes.func
 }
 
 export default StoryDetail;

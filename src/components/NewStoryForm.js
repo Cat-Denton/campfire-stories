@@ -12,7 +12,7 @@ function NewStoryForm(props){
 
   return (
     <React.Fragment>
-      <ReuseableStoryForm newStoryFormSubmissionHandler={handleNewStoryFormSubmission} buttonText='Share your tale far and wide' />
+      <ReuseableStoryForm storyFormSubmissionHandler={handleNewStoryFormSubmission} buttonText='Share your tale far and wide' />
     </React.Fragment>
   )
 }

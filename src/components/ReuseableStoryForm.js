@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function ReuseableStoryForm(props) {
     return (
         <React.Fragment>
-            <form onSubmit={props.newStoryFormSubmissionHandler}>
+            <form onSubmit={props.storyFormSubmissionHandler}>
                 <input
                     type='text'
                     name='title'
@@ -25,14 +25,14 @@ function ReuseableStoryForm(props) {
                     name='entryList'
                     placeholder='Start telling your tale' />
                 <br />
-                <button type='submit'>Stay a while, and listen</button>
+                <button type='submit'>{props.buttonText}</button>
             </form>
         </React.Fragment>
     )
 }
 
 ReuseableStoryForm.propTypes = {
-    newStoryFormSubmissionHandler: PropTypes.func,
+    storyFormSubmissionHandler: PropTypes.func,
     buttonText: PropTypes.string
 }
 
