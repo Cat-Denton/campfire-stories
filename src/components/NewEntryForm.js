@@ -1,10 +1,10 @@
 import React from 'react';
-import { v4 } from 'uuid';
+import PropTypes from 'prop-types'
 
-function NewEntryForm() {
+function NewEntryForm(props) {
     return (
         <React.Fragment>
-            <form>
+            <form onSubmit={props.addingNewEntryHandler}>
                 <textarea
                     rows="18"
                     cols="76"
@@ -15,6 +15,10 @@ function NewEntryForm() {
             </form>
         </React.Fragment>
     )
+}
+
+NewEntryForm.propTypes = {
+    addingNewEntryHandler: PropTypes.func
 }
 
 export default NewEntryForm;

@@ -87,7 +87,7 @@ class StoryControl extends React.Component {
       />
       buttonText = "Nevermind, maybe read another story."
     } else if (this.state.selectedStory !== null) {
-      currentlyVisibleState = <StoryDetail story = {this.state.selectedStory} onClickingDelete = {this.handleDeletingStory} onClickingEditStory = {this.handleEditStoryClick} />
+      currentlyVisibleState = <StoryDetail story = {this.state.selectedStory} onClickingDelete = {this.handleDeletingStory} onClickingEditStory = {this.handleEditStoryClick} onClickingAddEntry = {this.handleEditingStoryInList} />
       buttonText = "Find a different tale."
     } else {
       currentlyVisibleState = <StoryList storyList={this.state.masterStoryList} onStorySelection = {this.handleChangingSelectedStory} />
