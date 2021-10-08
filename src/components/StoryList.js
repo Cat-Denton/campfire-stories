@@ -13,7 +13,7 @@ function StoryList(props) {
   // entryList: [{text:"stuf stuff stuff stuff stuff stuff"}, {text: "eat eat eat eat eat eat eat eat eat"}]}]
   return (
     <React.Fragment>
-      {props.storyList.map((story,index) =>
+      {Object.values(props.storyList).map((story,index) =>
         <div key={index}>
           <Story
             whenStoryClicked={props.onStorySelection}
@@ -33,7 +33,7 @@ function StoryList(props) {
 }
 
 StoryList.propTypes ={
-  storyList: PropTypes.array,
+  storyList: PropTypes.object,
   onStorySelection: PropTypes.func
 }
 export default StoryList;

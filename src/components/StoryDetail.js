@@ -23,7 +23,7 @@ function StoryDetail(props){
         <h3>by {story.author}</h3>
         <em>Tags:</em> {story.tags.map((tag, index) =>
           <span key={index}>
-            {tag} {' '}
+            {'•'} {tag} {' '}
           </span>
         )}
         <br />

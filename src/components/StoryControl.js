@@ -3,6 +3,9 @@ import NewStoryForm from "./NewStoryForm";
 import StoryDetail from "./StoryDetail";
 import StoryList from './StoryList';
 import EditStoryForm from './EditStoryForm';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import Story from "./Story";
 
 class StoryControl extends React.Component {
   constructor(props) {
@@ -16,13 +19,25 @@ class StoryControl extends React.Component {
   }
 
   handleAddingNewStoryToList = (newStory) => {
-    const newMasterStoryList = this.state.masterStoryList.concat(newStory);
-    this.setState({masterStoryList: newMasterStoryList,
-    formVisibleOnPage: false, selectedStory: newStory });
+    // const newMasterStoryList = this.state.masterStoryList.concat(newStory);
+    // this.setState({masterStoryList: newMasterStoryList,
+    // formVisibleOnPage: false, selectedStory: newStory });
+    const { dispatch } = this.props;
+    const { title, author, tags, entryList, id} = newStory;
+    const action = {
+      type: 'ADD_STORY',
+      title,
+      author,
+      tags,
+      entryList,
+      id
+    }
+    dispatch(action);
+    this.setState({formVisibleOnPage: false, selectedStory: newStory});
   }
   
   handleChangingSelectedStory = (id) => {
-    const selectedStory = this.state.masterStoryList.filter(story => story.id === id)[0];
+    const selectedStory = this.props.masterStoryList[id];
     this.setState({selectedStory: selectedStory});
   }
 
@@ -48,11 +63,18 @@ class StoryControl extends React.Component {
   }
 
   handleDeletingStory = (id) => {
-    const newMasterStoryList = this.state.masterStoryList.filter(story => story.id !== id);
-    this.setState({
-      masterStoryList: newMasterStoryList,
-      selectedStory: null
-    })
+    // const newMasterStoryList = this.state.masterStoryList.filter(story => story.id !== id);
+    // this.setState({
+    //   masterStoryList: newMasterStoryList,
+    //   selectedStory: null
+    // })
+    const { dispatch } = this.props;
+    const action = {
+      type: 'DELETE_STORY',
+      id
+    }
+    dispatch(action);
+    this.setState({selectedStory: null});
   }
 
   handleEditStoryClick = () => {
@@ -60,14 +82,27 @@ class StoryControl extends React.Component {
   }
 
   handleEditingStoryInList = (storyToEdit) => {
-    const editedMasterStoryList = this.state.masterStoryList.filter(story => story.id !== this.state.selectedStory.id).concat(storyToEdit);
-    
+    // const editedMasterStoryList = this.state.masterStoryList.filter(story => story.id !== this.state.selectedStory.id).concat(storyToEdit);    
+    // this.setState({
+    //   masterStoryList: editedMasterStoryList,
+    //   editingStory: false,
+    //   selectedStory: storyToEdit
+    // });
+    const { dispatch } = this.props;
+    const { title, author, tags, entryList, id } = storyToEdit;
+    const action = {
+      type: 'ADD_STORY',
+      title,
+      author,
+      tags,
+      entryList,
+      id
+    }
+    dispatch(action);
     this.setState({
-      masterStoryList: editedMasterStoryList,
-      editingStory: false,
+      editing: false,
       selectedStory: storyToEdit
     });
-    console.log(this.state)
   }
 
   render(){
@@ -85,7 +120,7 @@ class StoryControl extends React.Component {
       currentlyVisibleState = <StoryDetail story = {this.state.selectedStory} onClickingDelete = {this.handleDeletingStory} onClickingEditStory = {this.handleEditStoryClick} onClickingAddEntry = {this.handleEditingStoryInList} onClickingAddTag={this.handleEditingStoryInList} />
       buttonText = "Find a different tale."
     } else {
-      currentlyVisibleState = <StoryList storyList={this.state.masterStoryList} onStorySelection = {this.handleChangingSelectedStory} />
+      currentlyVisibleState = <StoryList storyList={this.props.masterStoryList} onStorySelection = {this.handleChangingSelectedStory} />
       buttonText = "Start a new story."
     }
 
@@ -97,5 +132,17 @@ class StoryControl extends React.Component {
     )
   }
 }
+
+StoryControl.propTypes = {
+  masterStoryList: PropTypes.object
+}
+
+const mapStateToProps = state => {
+  return {
+    masterStoryList: state
+  }
+}
+
+StoryControl = connect(mapStateToProps)(StoryControl);
 
 export default StoryControl;
