@@ -19,9 +19,6 @@ class StoryControl extends React.Component {
   }
 
   handleAddingNewStoryToList = (newStory) => {
-    // const newMasterStoryList = this.state.masterStoryList.concat(newStory);
-    // this.setState({masterStoryList: newMasterStoryList,
-    // formVisibleOnPage: false, selectedStory: newStory });
     const { dispatch } = this.props;
     const { title, author, tags, entryList, id} = newStory;
     const action = {
@@ -63,11 +60,6 @@ class StoryControl extends React.Component {
   }
 
   handleDeletingStory = (id) => {
-    // const newMasterStoryList = this.state.masterStoryList.filter(story => story.id !== id);
-    // this.setState({
-    //   masterStoryList: newMasterStoryList,
-    //   selectedStory: null
-    // })
     const { dispatch } = this.props;
     const action = {
       type: 'DELETE_STORY',
@@ -82,12 +74,6 @@ class StoryControl extends React.Component {
   }
 
   handleEditingStoryInList = (storyToEdit) => {
-    // const editedMasterStoryList = this.state.masterStoryList.filter(story => story.id !== this.state.selectedStory.id).concat(storyToEdit);    
-    // this.setState({
-    //   masterStoryList: editedMasterStoryList,
-    //   editingStory: false,
-    //   selectedStory: storyToEdit
-    // });
     const { dispatch } = this.props;
     const { title, author, tags, entryList, id } = storyToEdit;
     const action = {
