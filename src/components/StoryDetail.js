@@ -2,13 +2,19 @@ import React from 'react';
 import Entry from './Entry';
 import PropTypes from 'prop-types'
 import NewEntryForm from './NewEntryForm';
+import NewTagForm from './NewTagForm';
 
 function StoryDetail(props){
-  const { story, onClickingDelete, onClickingEditStory } = props;
+  const { story, onClickingDelete, onClickingEditStory, onClickingAddEntry, onClickingAddTag } = props;
 
   function handleAddingNewEntryToStory(event) {
     event.preventDefault();
-    props.onClickingAddEntry({title: story.title, author: story.author, tags: story.tags, entryList: story.entryList.concat(event.target.entry.value), id: story.id})
+    onClickingAddEntry({title: story.title, author: story.author, tags: story.tags, entryList: story.entryList.concat(event.target.entry.value), id: story.id})
+  }
+
+  function handleAddingTagToStory(event) {
+    event.preventDefault();
+    onClickingAddTag({title: story.title, author: story.author, tags: story.tags.concat(event.target.tag.value), entryList: story.entryList, id: story.id})
   }
 
   return (
@@ -20,6 +26,8 @@ function StoryDetail(props){
             {tag} {' '}
           </span>
         )}
+        <br />
+        <NewTagForm addingNewTagHandler={handleAddingTagToStory} />       
         <hr />
         {story.entryList.map((entry, index) =>
           <span key={index}>
@@ -39,7 +47,8 @@ StoryDetail.propTypes = {
   story: PropTypes.object,
   onClickingDelete: PropTypes.func,
   onClickinEditStory: PropTypes.func,
-  onClickingAddEntry: PropTypes.func
+  onClickingAddEntry: PropTypes.func,
+  onClickingAddTag: PropTypes.func
 }
 
 export default StoryDetail;

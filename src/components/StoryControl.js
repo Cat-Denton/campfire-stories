@@ -21,11 +21,6 @@ class StoryControl extends React.Component {
     formVisibleOnPage: false, selectedStory: newStory });
   }
   
-  // handleAddingNewEntryToStoryInList = (id, entry) => {
-  //   const newMasterStoryList = this.state.masterStoryList.story[id].entryList.concat(entry)
-  //   this.setState({masterStoryList: newMasterStoryList})
-  // }
-
   handleChangingSelectedStory = (id) => {
     const selectedStory = this.state.masterStoryList.filter(story => story.id === id)[0];
     this.setState({selectedStory: selectedStory});
@@ -87,7 +82,7 @@ class StoryControl extends React.Component {
       />
       buttonText = "Nevermind, maybe read another story."
     } else if (this.state.selectedStory !== null) {
-      currentlyVisibleState = <StoryDetail story = {this.state.selectedStory} onClickingDelete = {this.handleDeletingStory} onClickingEditStory = {this.handleEditStoryClick} onClickingAddEntry = {this.handleEditingStoryInList} />
+      currentlyVisibleState = <StoryDetail story = {this.state.selectedStory} onClickingDelete = {this.handleDeletingStory} onClickingEditStory = {this.handleEditStoryClick} onClickingAddEntry = {this.handleEditingStoryInList} onClickingAddTag={this.handleEditingStoryInList} />
       buttonText = "Find a different tale."
     } else {
       currentlyVisibleState = <StoryList storyList={this.state.masterStoryList} onStorySelection = {this.handleChangingSelectedStory} />
