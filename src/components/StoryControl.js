@@ -12,7 +12,6 @@ class StoryControl extends React.Component {
     super(props);
     this.state = {
       formVisibleOnPage: false,
-      masterStoryList: [],
       selectedStory: null,
       editingStory: false
     };

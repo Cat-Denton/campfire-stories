@@ -1,4 +1,4 @@
-import storyListReducer from "../reducers/story-list-reducer";
+import storyListReducer from "../../reducers/story-list-reducer";
 
 describe('storyListReducer', () => {
   let action;
