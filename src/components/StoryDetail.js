@@ -34,8 +34,8 @@ function StoryDetail(props){
             <Entry text={entry} />
           </span>
         )}
-        <hr />
         <NewEntryForm addingNewEntryHandler={handleAddingNewEntryToStory}/>
+        <hr />
         <button onClick={()=> onClickingEditStory()}>Change this story's details.</button>
         <button onClick={()=> onClickingDelete(story.id) }>Erase this tale from time.</button>
 
