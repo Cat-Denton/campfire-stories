@@ -8,7 +8,9 @@ export default (state = null, action) => {
         tags,
         entryList,
         id
-      }
+      };
+    case 'NULL_STORY':
+      return null;
     default:
       return state;
   }

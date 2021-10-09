@@ -5,14 +5,12 @@ import StoryList from './StoryList';
 import EditStoryForm from './EditStoryForm';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Story from "./Story";
 
 class StoryControl extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       formVisibleOnPage: false,
-      selectedStory: null,
       editingStory: false
     };
   }
@@ -32,9 +30,19 @@ class StoryControl extends React.Component {
     this.setState({formVisibleOnPage: false, selectedStory: newStory});
   }
   
-  handleChangingSelectedStory = (id) => {
-    const selectedStory = this.props.masterStoryList[id];
-    this.setState({selectedStory: selectedStory});
+  handleChangingSelectedStory = (storyId) => {
+    const selectedStory = this.props.masterStoryList[storyId];
+    const { dispatch } = this.props;
+    const { title, author, tags, entryList, id} = selectedStory;
+    const action = {
+      type: 'SELECT_STORY',
+      title,
+      author,
+      tags,
+      entryList,
+      id
+    }
+    dispatch(action);
   }
 
   handleClick = () => {
@@ -43,18 +51,28 @@ class StoryControl extends React.Component {
         formVisibleOnPage: false,
         editingStory: false
       })
-    } else if (this.state.selectedStory != null) {
+    } else if (this.props.selectedStory != null) {
       this.setState({
-        selectedStory: null,
+        // selectedStory: null,
         formVisibleOnPage: false,
         editingStory: false
       })
+      const { dispatch } = this.props;
+      const action = {
+        type: 'NULL_STORY'
+      }
+      dispatch(action);
     } else {
       this.setState(prevState => ({
         formVisibleOnPage: !prevState.formVisibleOnPage,
-        selectedStory: null,
+        // selectedStory: null,
         editingStory: false
       }));
+      const { dispatch } = this.props;
+      const action = {
+        type: 'NULL_STORY'
+      }
+      dispatch(action)
     }
   }
 
@@ -65,7 +83,10 @@ class StoryControl extends React.Component {
       id
     }
     dispatch(action);
-    this.setState({selectedStory: null});
+    const action2 = {
+      type: 'NULL_STORY'
+    }
+    dispatch(action2);
   }
 
   handleEditStoryClick = () => {
@@ -84,9 +105,18 @@ class StoryControl extends React.Component {
       id
     }
     dispatch(action);
+    const action2 = {
+      type: 'SELECT_STORY',
+      title,
+      author,
+      tags,
+      entryList,
+      id
+    }
+    dispatch(action2);
     this.setState({
       editing: false,
-      selectedStory: storyToEdit
+      // selectedStory: storyToEdit
     });
   }
 
@@ -94,15 +124,15 @@ class StoryControl extends React.Component {
     let currentlyVisibleState = null;
     let buttonText = null;
     if (this.state.editingStory) {
-      currentlyVisibleState = <EditStoryForm story = {this.state.selectedStory} onEditStory = {this.handleEditingStoryInList} />
+      currentlyVisibleState = <EditStoryForm story = {this.props.selectedStory} onEditStory = {this.handleEditingStoryInList} />
       buttonText = "Nevermind, I don't need to change anything";
     } else if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <NewStoryForm 
       onNewStoryCreation = {this.handleAddingNewStoryToList}
       />
       buttonText = "Nevermind, maybe read another story."
-    } else if (this.state.selectedStory !== null) {
-      currentlyVisibleState = <StoryDetail story = {this.state.selectedStory} onClickingDelete = {this.handleDeletingStory} onClickingEditStory = {this.handleEditStoryClick} onClickingAddEntry = {this.handleEditingStoryInList} onClickingAddTag={this.handleEditingStoryInList} />
+    } else if (this.props.selectedStory !== null) {
+      currentlyVisibleState = <StoryDetail story = {this.props.selectedStory} onClickingDelete = {this.handleDeletingStory} onClickingEditStory = {this.handleEditStoryClick} onClickingAddEntry = {this.handleEditingStoryInList} onClickingAddTag={this.handleEditingStoryInList} />
       buttonText = "Find a different tale."
     } else {
       currentlyVisibleState = <StoryList storyList={this.props.masterStoryList} onStorySelection = {this.handleChangingSelectedStory} />
@@ -119,12 +149,14 @@ class StoryControl extends React.Component {
 }
 
 StoryControl.propTypes = {
-  masterStoryList: PropTypes.object
+  masterStoryList: PropTypes.object,
+  selectedStory: PropTypes.object
 }
 
 const mapStateToProps = state => {
   return {
-    masterStoryList: state
+    masterStoryList: state.masterStoryList,
+    selectedStory: state.selectedStory
   }
 }
 
