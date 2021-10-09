@@ -1,4 +1,6 @@
 import selectedStoryReducer from '../../reducers/selected-story-reducer';
+import * as c from '../../actions/ActionTypes';
+
 
 describe("selectedStoryReducer", () => {
   let action;
@@ -18,7 +20,7 @@ describe("selectedStoryReducer", () => {
   test('should successfully add selected story data to selectedStory state slice', () => {
     const { title, author, tags, entryList, id } = storyData
     action = {
-      type: 'SELECT_STORY',
+      type: c.SELECT_STORY,
       title,
       author,
       tags,
@@ -29,6 +31,6 @@ describe("selectedStoryReducer", () => {
   });
 
   test('should successfully set selected story to null', () => {
-    expect(selectedStoryReducer(storyData, {type: 'NULL_STORY'})).toEqual(null);
+    expect(selectedStoryReducer(storyData, {type: c.NULL_STORY})).toEqual(null);
   })
 });

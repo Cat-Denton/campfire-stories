@@ -1,4 +1,5 @@
 import storyListReducer from "../../reducers/story-list-reducer";
+import * as c from '../../actions/ActionTypes';
 
 describe('storyListReducer', () => {
   let action;
@@ -17,7 +18,7 @@ describe('storyListReducer', () => {
   test('Should successfully add new story data to masterStoryList', () => {
     const { title, author, tags, entryList, id } = storyData;
     action = {
-      type: 'ADD_STORY',
+      type: c.ADD_STORY,
       title,
       author,
       tags,
@@ -33,5 +34,16 @@ describe('storyListReducer', () => {
         id
       }
     })
+  })
+  
+  test('should delete a story of correct id', () => {
+    action = {
+      type: c.DELETE_STORY,
+      id: 1
+    }
+    const newState = {
+      2: {title: 'humans suck', author: 'a normal human', tags: ['true', 'normal'], entryList: ['jerks jerks jerks', 'totally just a normal human'], id: 2}
+    }
+    expect(storyListReducer(currentState, action)).toEqual(newState)
   })
 })

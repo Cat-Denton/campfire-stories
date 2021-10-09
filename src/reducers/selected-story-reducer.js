@@ -1,7 +1,9 @@
+import * as c from './../actions/ActionTypes';
+
 export default (state = null, action) => {
   const {title, author, tags, entryList, id} = action;
   switch (action.type) {
-    case 'SELECT_STORY':
+    case c.SELECT_STORY:
       return {
         title,
         author,
@@ -9,7 +11,7 @@ export default (state = null, action) => {
         entryList,
         id
       };
-    case 'NULL_STORY':
+    case c.NULL_STORY:
       return null;
     default:
       return state;

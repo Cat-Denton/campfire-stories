@@ -1,7 +1,9 @@
+import * as c from './../actions/ActionTypes'
+
 export default (state = {}, action) => {
   const {title, author, tags, entryList, id} = action;
   switch (action.type) {
-    case 'ADD_STORY':
+    case c.ADD_STORY:
       return Object.assign({}, state, {
         [id]: {
           title,
@@ -11,7 +13,7 @@ export default (state = {}, action) => {
           id
         }
       })
-    case 'DELETE_STORY':
+    case c.DELETE_STORY:
       const newState = { ...state };
       delete newState[id];
       return newState;

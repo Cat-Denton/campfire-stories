@@ -2,6 +2,7 @@ import rootReducer from '../../reducers/index.js';
 import { createStore } from 'redux';
 import storyListReducer from '../../reducers/story-list-reducer';
 import selectedStoryReducer from '../../reducers/selected-story-reducer';
+import * as c from '../../actions/ActionTypes';
 
 let store = createStore(rootReducer);
 
@@ -24,7 +25,7 @@ describe('rootReducer', () => {
 
   test('Check that ADD_STORY action works for storyListReducer and root reducer', () => {
     const action = {
-      type: 'ADD_STORY',
+      type: c.ADD_STORY,
       title: 'dogs',
       author: 'just a human',
       tags: ['amazing', 'smells'],
@@ -37,7 +38,7 @@ describe('rootReducer', () => {
 
   test('Check that SELECT_STORY action works for selectedStoryReducer and root reducer', () => {
     const action = {
-      type: 'SELECT_STORY',
+      type: c.SELECT_STORY,
       title: 'dogs',
       author: 'just a human',
       tags: ['amazing', 'smells'],
