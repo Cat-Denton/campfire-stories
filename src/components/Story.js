@@ -11,7 +11,7 @@ function Story(props) {
         <h3>by {props.author}</h3>
         <em>Tags:</em> {props.tags.map((tag, index) =>
           <span key={index}>
-            {tag} {' '}
+            {'•'} {tag} {' '}
           </span>
         )}
       </div>

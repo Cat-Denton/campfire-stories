@@ -15,27 +15,6 @@ describe('storyListReducer', () => {
     expect(storyListReducer({}, { type: null})).toEqual({});
   });
 
-  test('Should successfully add new story data to masterStoryList', () => {
-    const { title, author, tags, entryList, id } = storyData;
-    action = {
-      type: c.ADD_STORY,
-      title,
-      author,
-      tags,
-      entryList,
-      id
-    };
-    expect(storyListReducer({}, action)).toEqual({
-      [id]: {
-        title,
-        author,
-        tags,
-        entryList,
-        id
-      }
-    })
-  })
-  
   test('should delete a story of correct id', () => {
     action = {
       type: c.DELETE_STORY,

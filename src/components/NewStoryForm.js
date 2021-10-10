@@ -15,8 +15,8 @@ function NewStoryForm(props){
       {
         title: event.target.title.value,
         author: event.target.author.value,
-        tags: event.target.tags.value,
-        entryList: event.target.entryList.value
+        tags: event.target.tags.value.split(" "),
+        entryList: event.target.entryList.value.split("\n")
       }
     )
   }
