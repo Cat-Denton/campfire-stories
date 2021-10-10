@@ -5,6 +5,7 @@ import StoryList from './StoryList';
 import EditStoryForm from './EditStoryForm';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { withFirestore } from 'react-redux-firebase';
 
 class StoryControl extends React.Component {
   constructor(props) {
@@ -15,46 +16,31 @@ class StoryControl extends React.Component {
     };
   }
 
-  handleAddingNewStoryToList = (newStory) => {
-    // const { dispatch } = this.props;
-    // // const { title, author, tags, entryList, id} = newStory;
-    // // const action = {
-    // //   type: 'ADD_STORY',
-    // //   title,
-    // //   author,
-    // //   tags,
-    // //   entryList,
-    // //   id
-    // // }
-    // dispatch(action);
-    this.setState({formVisibleOnPage: false});
-    // const { dispatch } = this.props;
-    // const { title, author, tags, entryList, id} = newStory;
-    // const action = {
-    //   type: 'SELECT_STORY',
-    //   title,
-    //   author,
-    //   tags,
-    //   entryList,
-    //   id
-    // }
-    // dispatch(action);
-
+  handleAddingNewStoryToList = () => {    
+    this.setState({ formVisibleOnPage: false });    
   }
-  
-  handleChangingSelectedStory = (storyId) => {
-    const selectedStory = this.props.masterStoryList[storyId];
-    const { dispatch } = this.props;
-    const { title, author, tags, entryList, id} = selectedStory;
-    const action = {
-      type: 'SELECT_STORY',
-      title,
-      author,
-      tags,
-      entryList,
-      id
-    }
-    dispatch(action);
+
+  handleChangingSelectedStory = (id) => {
+    this.props.firestore.get({ collection: 'stories', doc: id }).then((story) => {
+      const firestoreStory = {
+        title: story.get('title'),
+        author: story.get('author'),
+        tags: story.get('tags'),
+        entryList: story.get('entryList'),
+        id: story.id
+      }
+      const { title, author, tags, entryList, id } = firestoreStory;
+      const { dispatch } = this.props;
+      const action = {
+        type: 'SELECT_STORY',
+        title,
+        author,
+        tags,
+        entryList,
+        id
+      }
+      dispatch(action);
+    })
   }
 
   handleClick = () => {
@@ -102,7 +88,7 @@ class StoryControl extends React.Component {
   }
 
   handleEditStoryClick = () => {
-    this.setState({editingStory: true});
+    this.setState({ editingStory: true });
   }
 
   handleEditingStoryInList = (storyToEdit) => {
@@ -132,22 +118,22 @@ class StoryControl extends React.Component {
     });
   }
 
-  render(){
+  render() {
     let currentlyVisibleState = null;
     let buttonText = null;
     if (this.state.editingStory) {
-      currentlyVisibleState = <EditStoryForm story = {this.props.selectedStory} onEditStory = {this.handleEditingStoryInList} />
+      currentlyVisibleState = <EditStoryForm story={this.props.selectedStory} onEditStory={this.handleEditingStoryInList} />
       buttonText = "Nevermind, I don't need to change anything";
     } else if (this.state.formVisibleOnPage) {
-      currentlyVisibleState = <NewStoryForm 
-      onNewStoryCreation = {this.handleAddingNewStoryToList}
+      currentlyVisibleState = <NewStoryForm
+        onNewStoryCreation={this.handleAddingNewStoryToList}
       />
       buttonText = "Nevermind, maybe read another story."
     } else if (this.props.selectedStory !== null) {
-      currentlyVisibleState = <StoryDetail story = {this.props.selectedStory} onClickingDelete = {this.handleDeletingStory} onClickingEditStory = {this.handleEditStoryClick} onClickingAddEntry = {this.handleEditingStoryInList} onClickingAddTag={this.handleEditingStoryInList} />
+      currentlyVisibleState = <StoryDetail story={this.props.selectedStory} onClickingDelete={this.handleDeletingStory} onClickingEditStory={this.handleEditStoryClick} onClickingAddEntry={this.handleEditingStoryInList} onClickingAddTag={this.handleEditingStoryInList} />
       buttonText = "Find a different tale."
     } else {
-      currentlyVisibleState = <StoryList storyList={this.props.masterStoryList} onStorySelection = {this.handleChangingSelectedStory} />
+      currentlyVisibleState = <StoryList storyList={this.props.masterStoryList} onStorySelection={this.handleChangingSelectedStory} />
       buttonText = "Start a new story."
     }
 
@@ -174,4 +160,4 @@ const mapStateToProps = state => {
 
 StoryControl = connect(mapStateToProps)(StoryControl);
 
-export default StoryControl;
+export default withFirestore(StoryControl);
