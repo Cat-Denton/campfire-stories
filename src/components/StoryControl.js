@@ -51,7 +51,6 @@ class StoryControl extends React.Component {
       })
     } else if (this.props.selectedStory != null) {
       this.setState({
-        // selectedStory: null,
         formVisibleOnPage: false,
         editingStory: false
       })
@@ -63,7 +62,6 @@ class StoryControl extends React.Component {
     } else {
       this.setState(prevState => ({
         formVisibleOnPage: !prevState.formVisibleOnPage,
-        // selectedStory: null,
         editingStory: false
       }));
       const { dispatch } = this.props;
@@ -76,15 +74,11 @@ class StoryControl extends React.Component {
 
   handleDeletingStory = (id) => {
     const { dispatch } = this.props;
+    this.props.firestore.delete({collection: 'stories', doc: id});
     const action = {
-      type: 'DELETE_STORY',
-      id
-    }
-    dispatch(action);
-    const action2 = {
       type: 'NULL_STORY'
     }
-    dispatch(action2);
+    dispatch(action);
   }
 
   handleEditStoryClick = () => {
@@ -105,7 +99,6 @@ class StoryControl extends React.Component {
     dispatch(action);
     this.setState({
       editing: false,
-      // selectedStory: storyToEdit
     });
   }
 
