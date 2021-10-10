@@ -1,6 +1,6 @@
 // import * as firebase from 'firebase';
 // import 'firebase/firestore';
-import * as firebase from "firebase";
+import firebase from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
 import 'firebase/firestore'
 
