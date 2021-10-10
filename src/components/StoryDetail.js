@@ -13,15 +13,15 @@ function StoryDetail(props){
   function handleAddingNewEntryToStory(event) {
     event.preventDefault();
     const updatedEntryList = {entryList: story.entryList.concat(event.target.entry.value)}
-    // onClickingAddEntry({title: story.title, author: story.author, tags: story.tags, entryList: story.entryList.concat(event.target.entry.value), id: story.id})
+    onClickingAddEntry({title: story.title, author: story.author, tags: story.tags, entryList: story.entryList.concat(event.target.entry.value), id: story.id})
     return firestore.update({collection: 'stories', doc: story.id}, updatedEntryList)
   }
 
   function handleAddingTagToStory(event) {
     event.preventDefault();
     const updatedTags = {tags: story.tags.concat(event.target.tag.value)}
+    onClickingAddTag({title: story.title, author: story.author, tags: story.tags.concat(event.target.tag.value), entryList: story.entryList, id: story.id})
     return firestore.update({collection: 'stories', doc: story.id}, updatedTags)
-    // onClickingAddTag({title: story.title, author: story.author, tags: story.tags.concat(event.target.tag.value), entryList: story.entryList, id: story.id})
   }
 
   return (
