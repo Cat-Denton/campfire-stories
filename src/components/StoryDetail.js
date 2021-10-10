@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import NewEntryForm from './NewEntryForm';
 import NewTagForm from './NewTagForm';
 import { useFirestore } from 'react-redux-firebase';
-import { firestore } from 'firebase';
 
 function StoryDetail(props){
   const firestore = useFirestore();

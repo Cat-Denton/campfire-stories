@@ -10,7 +10,7 @@ function NewTagForm(props) {
           name='tag'
           placeholder='A tag should be a single word and descriptive' />
         <br />
-        <button type='submit'>Add descriptive tag</button>
+        <button type='submit'>Add tags, separated by spaces</button>
       </form>
     </React.Fragment>
   )
