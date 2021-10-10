@@ -95,15 +95,6 @@ class StoryControl extends React.Component {
     const { dispatch } = this.props;
     const { title, author, tags, entryList, id } = storyToEdit;
     const action = {
-      type: 'ADD_STORY',
-      title,
-      author,
-      tags,
-      entryList,
-      id
-    }
-    dispatch(action);
-    const action2 = {
       type: 'SELECT_STORY',
       title,
       author,
@@ -111,7 +102,7 @@ class StoryControl extends React.Component {
       entryList,
       id
     }
-    dispatch(action2);
+    dispatch(action);
     this.setState({
       editing: false,
       // selectedStory: storyToEdit
