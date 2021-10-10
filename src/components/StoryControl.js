@@ -16,7 +16,18 @@ class StoryControl extends React.Component {
     };
   }
 
-  handleAddingNewStoryToList = () => {    
+  handleAddingNewStoryToList = (newStory) => {
+    const { title, author, tags, entryList, id } = newStory;
+      const { dispatch } = this.props;
+      const action = {
+        type: 'SELECT_STORY',
+        title,
+        author,
+        tags,
+        entryList,
+        id
+      }
+      dispatch(action);
     this.setState({ formVisibleOnPage: false });    
   }
 

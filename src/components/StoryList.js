@@ -2,7 +2,7 @@ import React from "react";
 import Story from "./Story";
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase'
+import { useFirestoreConnect, isLoaded } from 'react-redux-firebase'
 
 function StoryList(props) {
 

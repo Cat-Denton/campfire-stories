@@ -16,7 +16,7 @@ function ReuseableStoryForm(props) {
                 <input
                     type='text'
                     name='tags'
-                    placeholder='Initial tag' />
+                    placeholder='Tags' />
                 <br />
                 <br />
                 <textarea

@@ -9,7 +9,7 @@ function NewStoryForm(props){
 
   function addStoryToFirestore(event) {
     event.preventDefault();
-    props.onNewStoryCreation();
+    props.onNewStoryCreation({title: event.target.title.value, author: event.target.author.value, tags: event.target.tags.value.split(" "), entryList: event.target.entryList.value.split("\n")});
 
     return firestore.collection('stories').add(
       {
@@ -23,7 +23,7 @@ function NewStoryForm(props){
 
   // function handleNewStoryFormSubmission(event) {
   //   event.preventDefault();
-  //   props.onNewStoryCreation({title: event.target.title.value, author: event.target.author.value, tags: [event.target.tags.value], entryList: [event.target.entryList.value], id: v4()});
+    // props.onNewStoryCreation({title: event.target.title.value, author: event.target.author.value, tags: [event.target.tags.value], entryList: [event.target.entryList.value], id: v4()});
   // }
 
   return (
