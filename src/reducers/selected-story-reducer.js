@@ -1,6 +1,6 @@
 import * as c from './../actions/ActionTypes';
 
-export default (state = null, action) => {
+const selectedStoryReducer = (state = null, action) => {
   const {title, author, tags, entryList, id} = action;
   switch (action.type) {
     case c.SELECT_STORY:
@@ -17,3 +17,5 @@ export default (state = null, action) => {
       return state;
   }
 }
+
+export default selectedStoryReducer;
