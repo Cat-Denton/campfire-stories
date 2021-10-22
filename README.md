@@ -1,19 +1,33 @@
-### Research & Planning Log
-#### Friday, 09/04
-* 13:00 Set up nodejs and npm on linux laptop
-* 15:00 create-react-app this project
-* 15:05 git configuration on new machine
-* 15:40 project file management/cleanup
+# _Campfire Stories_ 
 
-#### Friday 09/17
-* 15:30 review react and redux concepts
-* 16:30-19:30 watch youtube videos on databases with react and redux
+![campfire](/public/favicon.ico)
 
-### Sunday 09/26
+[See the firebase deployment here](https://campfire-stories-a3398.web.app/)
 
-*14:00-16:30 make campfire gif
+#### A web app for telling stories collaboratively with people across the world.
 
-# Getting Started with Create React App
+#### By _**Cat Denton**_
+
+## Technologies Used
+```
+* Javascript ES6
+* Node Package Manager
+* React.JS
+* React Redux
+* Firestore
+* Create React App
+* Jest
+* Webpack
+```
+
+## Description
+This website is currently in a very alpha state. Users can create new stories with a title, author name, tags and an initial entry. These stories are stored on a Firebase backend. Other users may read the stories and add their own tags and entries.
+
+## Future work
+* Implement firebase authorization workflow
+* Refactor to display entries from other users in real time
+* Implement a voting system
+* Implement search based on tags
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
